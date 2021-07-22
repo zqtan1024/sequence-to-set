@@ -142,7 +142,14 @@ mv glove.6B.100d.txt ../glove
 mv PubMed-shuffle-win-30.txt ../biovec
 ```
 
-Note: the BioWord2Vec needs to be converted to GloVe format. Refer to [the guide](https://radimrehurek.com/gensim/scripts/glove2word2vec.html).
+Note: the BioWord2Vec needs to be converted from binary format to text format. The code is as follows:
+
+```python
+from gensim.models.keyedvectors import KeyedVectors
+model = KeyedVectors.load_word2vec_format('PubMed-shuffle-win-30.bin', binary=True)
+model.save_word2vec_format('./PubMed-shuffle-win-30.txt', binary=False)
+
+```
 
 ## Citation
 If you have any questions, feel free to email `zqtan@zju.edu.cn`.
